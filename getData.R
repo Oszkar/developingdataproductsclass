@@ -72,7 +72,7 @@ translateTitle <- function(title) {
          "Sen to Chihiro no Kamikakushi" = return("Spirited Away"),
          "Das Leben der Anderen" = return("The Lives of Others"),
          "Nuovo Cinema Paradiso" = return("Cinema Paradiso"),
-         "Le fabuleux destin d'Amélie Poulain" = return("Amélie"),
+         "Le fabuleux destin d'Amélie Poulain" = return("Am%C3%A9lie"),
          "M" = return("M "),
          "Hotaru no haka" = return("Grave of the Fireflies"),
          "Oldeuboi" = return("Oldboy"),
