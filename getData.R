@@ -72,7 +72,7 @@ translateTitle <- function(title) {
          "Sen to Chihiro no Kamikakushi" = return("Spirited Away"),
          "Das Leben der Anderen" = return("The Lives of Others"),
          "Nuovo Cinema Paradiso" = return("Cinema Paradiso"),
-         "Le fabuleux destin d'Amélie Poulain" = return("Amelie"),
+         "Le fabuleux destin d'Amélie Poulain" = return("Amélie"),
          "M" = return("M "),
          "Hotaru no haka" = return("Grave of the Fireflies"),
          "Oldeuboi" = return("Oldboy"),
@@ -104,5 +104,7 @@ translateTitle <- function(title) {
          "Tenkû no shiro Rapyuta" = return("Castle in the Sky"),
          "Le samouraï" = return("Le Samourai"),
          "Fa yeung nin wa" = return("In the Mood for Love"),
+         "8½" = return("8%C2%BD"),
+         "Der Untergang" = return("Downfall"),
          return(title))
 }
