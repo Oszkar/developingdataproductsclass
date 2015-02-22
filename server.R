@@ -30,6 +30,8 @@ colnames(movies)[35] = "decade"
 # second data frame only for the movies that contain Box Office data
 movieswithBO <- movies[-which(movies$BoxOffice == "N/A"),]
 
+# a function to convert earning to actual numbers
+# i.e.: "$3.1M --> 3100000
 convertDollarToNumeric <- function(item) {
   # first, remove dollar sign
   item <- sub('\\$','',item) 
@@ -44,9 +46,11 @@ convertDollarToNumeric <- function(item) {
   return(item)
 }
 
+# save the earnings into a separate variable and name them correctly
 movieswithBO[,35] <- as.numeric(sapply(movieswithBO$BoxOffice, convertDollarToNumeric))
-
 colnames(movieswithBO)[35] = "Earnings"
+# this variable will duplicate the title variable but is needed for the google scatter plot
+# (tooltip variable name must contain ".html.tooltip")
 movieswithBO$Earnings.html.tooltip <- movieswithBO$Title
 
 shinyServer(function(input, output) {
@@ -88,6 +92,7 @@ shinyServer(function(input, output) {
     )
   })
   
+  # we'll need this as a numeric for easier subsetting
   boxxaxis <- reactive({
     switch(input$boxxaxis,
            "IMDB rating" = 16, 
@@ -97,6 +102,13 @@ shinyServer(function(input, output) {
            "Year released" = 2)
   })
   
+  trendchecked <- reactive({ 
+    input$trendcheckbox 
+  })
+  
+  # chart on the default page, using GoogleVis bubble chart
+  # all parameters of the chart is set up via user actions (dropdown menus)
+  # except the ID (idvar), which is the title of the movie all times
   output$view <- renderGvis({
     # only the selected amount of movies
     data <- movies[1:number(),]
@@ -111,7 +123,41 @@ shinyServer(function(input, output) {
                                  fontSize=10))
   })
   
+  # the second, simpler chart
+  # X axis is the box office earnings, Y axis can be selected by the user
+  # a linear trendline can be added with a checkbox
+  # checking this also opens up a very simple prediction model
+  # where the earnings of a move given selected parameter is predicted
   output$boxofficeview <- renderGvis({
-    gvisScatterChart(movieswithBO[,c(boxxaxis(), 35, 36)], options=list(height=950,fontSize=10))
+    ops <- list()
+    if(trendchecked()) {
+      ops <- list(height=950, fontSize=10, trendlines="0")
+    } else {
+      ops <- list(height=950, fontSize=10)
+    }
+      
+    gvisScatterChart(movieswithBO[,c(boxxaxis(), 35, 36)], 
+                     options=ops)
+    
+  })
+  
+  # a very simple linear prediction model
+  predict <- function() {
+    
+    prediction.frame <- data.frame(Variable=movieswithBO[,boxxaxis()], Value=movieswithBO$Earnings)
+    lma = lm(prediction.frame$Value~prediction.frame$Variable)
+    
+    prediction.frame <- data.frame(Variable=input$uservalue, Value=0)
+    calculated <- as.numeric(predict.lm(lma, prediction.frame))
+    
+    return(calculated)
+  }
+  
+  # update the text field with the prediction
+  output$calculatedvalue <- renderPrint({ predict() })
+  
+  output$table <- renderDataTable({
+    data <- movies[-c(10, 14, 26, 34)]
+    data
   })
 })
