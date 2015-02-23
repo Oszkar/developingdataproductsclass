@@ -1,5 +1,4 @@
 library(shiny)
-library(ggvis)
 library(shinyAce)
 
 # shinyAce allows us to read in source files and display it in the shiny webapp
@@ -95,6 +94,12 @@ shinyUI(
              "A global search can be found at the top, a more detailed search at the bottom",
              hr(),
              dataTableOutput(outputId="table")
+    ),
+  
+    tabPanel("Data dowload",
+      "By clicking the button below, you can download the IMDB top250 data this webapp uses.",
+      br(),br(),
+      downloadButton('downloadData', 'Download')
     ),
     
     tabPanel("Help / Manual",

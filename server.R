@@ -160,4 +160,13 @@ shinyServer(function(input, output) {
     data <- movies[-c(10, 14, 26, 34)]
     data
   })
+  
+  output$downloadData <- downloadHandler(
+    filename = function() { 
+      return("movies.csv") 
+    },
+    content = function(file) {
+      write.csv(movies, file)
+    }
+  )
 })
