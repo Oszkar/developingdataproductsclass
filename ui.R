@@ -103,7 +103,37 @@ shinyUI(
     ),
     
     tabPanel("Help / Manual",
-             "asdasdasd"
+       "This page is a short introduction into the usage of this webpage",
+       hr(),
+       tags$ul(
+         tags$li("Ratings: This is the main page where IMDB and Rotten Tomatoes (RT) ratings can be visualized against each other or against release
+           date of the movie. The axes of the chart can be selected/changed via the dropdown menu on the left. 
+           The bubble size of the chart is also customizable, it can correspond to 
+           IMDB/Rotten Tomatoe rating number or the Metascore. Lastly, the color of the bubbles also customizable, 
+           it can represent MPAA rating or release data (exact year or decade)."), 
+         tags$li("Box office: A simpler chart where box office can be visualized against the IMDB 
+            or RT data or release date. Also a prediction tool can be used to predict box office earnings. 
+            For the box office prediction, the simplest possible prediction is used by fitting a linear model (trendline) 
+            on the data and using that line to predict Y values for X values that are entered by the user."), 
+         tags$li("Data retrieval: The code and description on how the movie data was acquired."),
+         tags$li("Data and Data download: Online viewer and downloader for the movie data.")
+       ),
+       br(),br(),
+       "Useful links",
+       hr(),
+       tags$ul(
+         tags$li(a("IMDB", href="http://www.imdb.com")), 
+         tags$li(a("Rotten Tomatoes", href="rottentomatoes.com")), 
+         tags$li(a("Metacritic", href="http://www.metacritic.com")),
+         tags$li(a("OMDB API", href="http://omdbapi.com"))
+       ),
+       br(),br(),
+       "Details of this webapp",
+       hr(),
+       tags$ul(
+         tags$li(a("GitHub repo", href="https://github.com/Oszkar/developingdataproductsclass")), 
+         tags$li(a("Supbmitted presentation", href="http://rpubs.com/Oszkar/MovieChartsPresentation"), "on Rpubs")
+       )
     )
   )
 )
