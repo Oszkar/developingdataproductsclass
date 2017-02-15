@@ -14,7 +14,7 @@ February 2015
 
 ### Author
 
-Oszkar Jozsa - [website] [site] - [twitter] [twitter]
+Oszkar Jozsa - [website] [site]
 
 All my coursework can be found [here](https://github.com/Oszkar/datasciencecoursera)
 
@@ -62,6 +62,5 @@ Rstudio presenter has a button to publish directly to Rpubs https://support.rstu
 
 You can also publish using both formats to github manually using gh-pages, though your github branch must have a .nojekyll fle and be on a branch names gh-pages. There's more on gh-pages here https://pages.github.com/  and there is a video lecture outlining how to do this.
 
-[site]:http://jozsaoszkar.com
-[twitter]:https://twitter.com/wasteproduct/
+[site]:http://oszkar.me
 
